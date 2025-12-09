@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function Home() {
+  const navigate = useNavigate();
+
   const dashboardCards = [
     {
       title: 'Clientes',
@@ -8,7 +12,8 @@ export default function Home() {
         </svg>
       ),
       color: 'blue' as const,
-      description: 'Gerencie seus clientes'
+      description: 'Gerencie seus clientes',
+      path: '/clients'
     },
     {
       title: 'Produtos',
@@ -18,7 +23,8 @@ export default function Home() {
         </svg>
       ),
       color: 'green' as const,
-      description: 'Controle seu estoque'
+      description: 'Controle seu estoque',
+      path: '/products'
     },
     {
       title: 'Agenda',
@@ -28,7 +34,8 @@ export default function Home() {
         </svg>
       ),
       color: 'purple' as const,
-      description: 'Organize suas datas'
+      description: 'Organize suas datas',
+      path: '/agenda'
     }
   ];
 
@@ -75,6 +82,7 @@ export default function Home() {
             return (
               <div
                 key={index}
+                onClick={() => card.path && navigate(card.path)}
                 className={`bg-white rounded-2xl border-2 ${colors.border} ${colors.hover} transition-all duration-300 cursor-pointer group`}
               >
                 <div className="p-8">
@@ -91,7 +99,7 @@ export default function Home() {
                   </p>
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <span className="text-sm text-gray-500">
-                      Em breve
+                      {card.path ? 'Acessar' : 'Em breve'}
                     </span>
                     <svg 
                       className="h-5 w-5 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all duration-300" 
