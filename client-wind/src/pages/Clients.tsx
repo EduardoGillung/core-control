@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { clientsService } from '../services/clientsService';
 import { useApi } from '../hooks/useApi';
 import { ClientModal } from '../components/modals/ClientsModal';
-
+import { clientsService } from '../services/ClientsService';
 
 
 interface Client {

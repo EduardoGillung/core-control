@@ -68,7 +68,7 @@ export default function ClientsForm({ onSubmit, loading }: ClientsFormProps) {
         <label className="block text-sm font-medium mb-1">Endereço</label>
         <textarea
           {...register("address")}
-          rows={3}
+          rows={1}
           className="w-full border rounded-md px-3 py-2"
         />
       </div>
