@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { clientsService } from '../services/clientsService';
 import { useApi } from '../hooks/useApi';
+import { ClientModal } from '../components/modals/ClientsModal';
+
+
 
 interface Client {
   id: number;
@@ -14,6 +17,11 @@ export default function Clients() {
   const [clients, setClients] = useState<Client[]>([]);
   const { loading, error, execute } = useApi(clientsService.getAll);
 
+
+  const [openModal, setOpenModal] = useState(false);
+  const { execute: createClient, loading: loadingCreate } = useApi(clientsService.create);
+
+
   useEffect(() => {
     loadClients();
   }, []);
@@ -26,6 +34,18 @@ export default function Clients() {
       console.error('Erro ao carregar clientes:', err);
     }
   };
+
+  
+  const handleCreate = async (data: any) => {
+  try {
+    const newClient = await createClient(data);
+
+    setClients(prev => [newClient, ...prev]);
+    setOpenModal(false);
+  } catch (err) {
+    alert("Erro ao criar cliente");
+  }
+};
 
   const handleDelete = async (id: number) => {
     if (!window.confirm('Deseja realmente excluir este cliente?')) return;
@@ -62,9 +82,12 @@ export default function Clients() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Clientes</h1>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-            Novo Cliente
-          </button>
+            <button
+              onClick={() => setOpenModal(true)}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-blue-700"
+            >
+              Novo Cliente
+            </button>
         </div>
 
         {clients.length === 0 ? (
@@ -135,6 +158,13 @@ export default function Clients() {
           </div>
         )}
       </div>
+        <ClientModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        onSubmit={handleCreate}
+        loading={loadingCreate}
+      />
     </div>
+    
   );
 }
