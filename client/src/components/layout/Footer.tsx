@@ -5,11 +5,13 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           
           <div>
-            <h3 className="text-white text-lg font-bold mb-4">Logo</h3>
+            <Link to="/" className="text-3xl text-gray-900 hover:text-blue-700 transition-colors" style={{ fontFamily: 'Damion, cursive' }}>
+              Corehud
+            </Link>
             <p className="text-sm leading-relaxed">
               Solução completa para suas necessidades digitais.
             </p>
@@ -20,22 +22,17 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-sm hover:text-white transition-colors">
-                  Home
+                  Ínicio
                 </Link>
               </li>
               <li>
                 <Link to="/sobre" className="text-sm hover:text-white transition-colors">
-                  Sobre
+                  Clientes
                 </Link>
               </li>
               <li>
                 <Link to="/servicos" className="text-sm hover:text-white transition-colors">
-                  Serviços
-                </Link>
-              </li>
-              <li>
-                <Link to="/contato" className="text-sm hover:text-white transition-colors">
-                  Contato
+                  Produtos
                 </Link>
               </li>
             </ul>

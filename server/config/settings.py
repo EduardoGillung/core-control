@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
     'apps.clients',
     'apps.products',
+    'apps.auth',
 ]
 
 MIDDLEWARE = [
@@ -129,4 +132,26 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        #define que a autenticação padrão será via JWT
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        # Padroniza as rotas exigir autenticação
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
+SIMPLE_JWT = {
+    # Tempo que o token de acesso (access) é válido
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60), 
+    
+    # Tempo que o token de atualização (refresh) é válido (usado para gerar um novo access)
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1), 
+    
+    # Adiciona o usuário e o token no payload de resposta (opcional, mas útil)
+    'ROTATE_REFRESH_TOKENS': True, 
+    'ALGORITHM': 'HS256',
+
+}

@@ -14,8 +14,8 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           
           <div className="flex items-center">
-            <Link to="/" className="text-md font-bold text-gray-900 hover:text-blue-700 transition-colors">
-              Core Client
+            <Link to="/" className="text-3xl text-gray-900 hover:text-blue-700 transition-colors" style={{ fontFamily: 'Damion, cursive' }}>
+              Corehud
             </Link>
           </div>
 
